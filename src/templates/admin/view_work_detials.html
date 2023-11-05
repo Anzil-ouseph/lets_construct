@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "admin/admin_index.html" %}
+{% block body %}
 <head>
     <meta charset="UTF-8">
     <title>View work details</title>
@@ -7,11 +7,11 @@
 <body>
 
 <form action="load_work_details" method="post">
-    <table border="1">
+    <table border="1" class="table table-striped table-hover table-dark" >
         <tr>
         <th>Select builder</th>
         <th>
-            <select name="select">
+            <select name="select" required>
 
                 {% for i in val %}
 
@@ -22,7 +22,7 @@
             </select>
         </th>
 
-        <td colspan="3"><input type="submit" value="Search"></td>
+        <td colspan="4"><input type="submit" value="Search" class="btn btn-primary"></td>
     </tr>
 
 
@@ -55,4 +55,4 @@
 </form>
 
 </body>
-</html>
+{% endblock %}

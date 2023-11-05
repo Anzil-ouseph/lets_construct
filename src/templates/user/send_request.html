@@ -1,0 +1,28 @@
+{% extends "user/user_index.html" %}
+{% block body %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Send Reply</title>
+</head>
+<body>
+
+<form method="post" action="insert_request">
+
+<table align="center" class="table table-striped table-hover table-dark">
+    <tr>
+        <th>Request</th>
+        <td><input type="text" name="textfield" required></td>
+    </tr>
+
+    <tr align="center">
+        <th colspan="2"><input type="submit" value="Send" class="btn btn-success"></th>
+    </tr>
+
+</table>
+
+</form>
+
+</body>
+{% endblock %}

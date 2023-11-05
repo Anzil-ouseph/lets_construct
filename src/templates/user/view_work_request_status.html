@@ -1,0 +1,36 @@
+{% extends "user/user_index.html" %}
+{% block body %}
+<head>
+    <meta charset="UTF-8">
+    <title>Verify users</title>
+</head>
+<body>
+
+<form method="post" action="add_work">
+
+
+<table border="1" class="table table-hover table-striped table-dark">
+    <tr>
+        <th>Builder Name</th>
+        <th>Work name</th>
+        <th>Image</th>
+        <th>Status
+        </th>
+    </tr>
+
+    {% for i in val %}
+
+    <tr>
+        <td>{{i['bname']}}</td>
+        <td>{{i['name']}}</td>
+        <td><img src="../static/uploads/{{i['image']}}" width='100px' height='100px' ></td>
+        <td>{{i['status']}}</td>
+    </tr>
+
+    {% endfor %}
+
+</table>
+</form>
+</body>
+<!--</html>-->
+{% endblock %}

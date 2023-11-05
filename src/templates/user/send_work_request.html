@@ -1,0 +1,46 @@
+{% extends "user/user_index.html" %}
+{% block body %}
+<head>
+    <meta charset="UTF-8">
+    <title>Verify users</title>
+</head>
+<body>
+
+<form method="post" action="add_work">
+
+
+<table border="1" class="table table-hover table-striped table-dark">
+    <tr>
+        <th>Builder Name</th>
+        <th>Work name</th>
+        <th>Place</th>
+        <th>Cost</th>
+        <th>Image</th>
+        <th>Map</th>
+        <th>Action
+        </th>
+    </tr>
+
+    {% for i in val %}
+
+    <tr>
+        <td>{{i['bname']}}</td>
+        <td>{{i['name']}}</td>
+        <td>{{i['place']}}</td>
+        <td>{{i['cost']}}</td>
+        <td><img src="../static/uploads/{{i['image']}}" width='100px' height='100px' ></td>
+
+        <td><a href="https://maps.google.com/maps?q={{i['latitude']}},{{i['longitude']}}">Locate builder in Map</a></td>
+
+        <td align="center">
+            <a href="send_request?id={{i['id']}}" class="btn btn-primary">Send request</a><br><br>
+        </td>
+    </tr>
+
+    {% endfor %}
+
+</table>
+</form>
+</body>
+<!--</html>-->
+{% endblock %}

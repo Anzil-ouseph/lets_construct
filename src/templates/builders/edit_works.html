@@ -1,0 +1,39 @@
+{% extends "builders/builders_index.html" %}
+{% block body %}
+<head>
+    <meta charset="UTF-8">
+    <title>Add work</title>
+</head>
+<body>
+<form action="update_work" method="post" enctype="multipart/form-data">
+<table border="1" align="center" class="table table-hover table-striped">
+    <tr>
+        <th>Work name</th>
+        <td><input type="text" name="textfield" value="{{val['name']}}" required></td>
+    </tr>
+
+    <tr>
+        <th>Place</th>
+        <td><input type="text" name="textfield2" value="{{val['place']}}" required></td>
+    </tr>
+
+    <tr>
+        <th>Cost</th>
+        <td><input type="text" name="textfield3" value="{{val['cost']}}" required></td>
+    </tr>
+
+    <tr>
+        <th>Image</th>
+        <td>
+            <img src="../static/uploads/{{val['image']}}" alt="{{val['image']}}" width="250" height="250">
+            <input type="file" name="img"></td>
+    </tr>
+
+    <tr align="center">
+        <td colspan="2"><input type="submit" value="Submit" class="btn btn-success"></td>
+    </tr>
+</table>
+</form>
+</body>
+<!--</html>-->
+{% endblock %}

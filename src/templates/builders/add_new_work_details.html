@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+<!--<!DOCTYPE html>-->
+{% extends "builders/builders_index.html" %}
+{% block body %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -6,31 +8,33 @@
 </head>
 <body>
 <form action="insert_works" method="post" enctype="multipart/form-data">
-<table border="1" align="center" class="table table-hover table-striped">
+<table border="1" align="center" class="table table-hover table-striped table-dark">
     <tr>
         <th>Work name</th>
-        <td><input type="text" name="textfield"></td>
+        <td><input type="text" name="textfield" required></td>
     </tr>
 
     <tr>
         <th>Place</th>
-        <td><input type="text" name="textfield2"></td>
+        <td><input type="text" name="textfield2" required></td>
     </tr>
 
     <tr>
         <th>Cost</th>
-        <td><input type="text" name="textfield3"></td>
+        <td><input type="text" name="textfield3" required></td>
     </tr>
 
     <tr>
         <th>Image</th>
-        <td><input type="file" name="img"></td>
+        <td><input type="file" name="img" required></td>
     </tr>
 
     <tr align="center">
-        <td colspan="2"><input type="submit" value="Submit"></td>
+        <td colspan="2"><input type="submit" value="Submit" class="btn btn-success"></td>
     </tr>
 </table>
 </form>
 </body>
-</html>
+<!--</html>-->
+
+{% endblock %}

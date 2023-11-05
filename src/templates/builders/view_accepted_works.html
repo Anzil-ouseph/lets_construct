@@ -1,0 +1,50 @@
+{% extends "builders/builders_index.html" %}
+{% block body %}
+<head>
+    <meta charset="UTF-8">
+    <title>Verify users</title>
+</head>
+<body>
+
+<form method="post" action="add_work">
+
+
+<table border="1" class="table table-hover table-striped table-dark">
+    <tr>
+        <th>User Details</th>
+        <th>Work</th>
+        <th>Date</th>
+        <th>Request</th>
+        <th>Current status</th>
+        <th>Action
+        </th>
+    </tr>
+
+    {% for i in val %}
+
+    <tr>
+        <td>
+            <b>Name</b> : {{i['first_name']}} {{i['last_name']}}<br>
+            <b>Place</b> : {{i['place']}}<br>
+            <b>Post</b> : {{i['post']}} <br>
+            <b>Pin</b> : {{i['pin']}} <br>
+            <b>Phone</b> : {{i['phone']}} <br>
+            <b>Email</b> : {{i['email']}}
+            </td>
+        <td>{{i['name']}}</td>
+        <td>{{i['date']}}</td>
+        <td>{{i['request']}}</td>
+        <td>{{i['status']}}</td>
+        <td>
+            <a href="update_work_status?id={{i['id']}}">Update status</a><br><br>
+        </td>
+    </tr>
+
+    {% endfor %}
+
+
+
+</table>
+</form>
+</body>
+{% endblock %}
