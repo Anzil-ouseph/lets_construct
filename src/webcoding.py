@@ -391,4 +391,57 @@ def view_work_status():
     return render_template('user/view_work_request_status.html' , val=res)
 
 
+@app.route('/user_complaint')
+def user_complaint():
+    qry = "	SELECT * FROM `complaint` WHERE `uid`=%s"
+    res = selectall2(qry, session['lid'])
+    return render_template('user/complaint.html', val=res)
+
+
+@app.route('/send_complaint', methods=['post'])
+def send_complaint():
+    return render_template('user/send_complaint.html')
+
+
+@app.route('/insert_complaint', methods=['post'])
+def insert_complaint():
+    complaint = request.form['textfield']
+    qry = "INSERT INTO `complaint` VALUES(NULL,%s,%s,%s,CURDATE())"
+    iud(qry,(session['lid'],complaint,'pending'))
+
+    return '''<script>alert("Success");window.location="user_complaint#get-started"</script>'''
+
+
+@app.route('/rating_and_review')
+def rating_and_review():
+    qry = "select `builders`.name,`rating_and_review`.* from `rating_and_review` join `builders` on `rating_and_review`.bid = `builders`.lid where `rating_and_review`.uid=%s"
+    res = selectall2(qry,session['lid'])
+    return render_template('user/rating_and_review.html', val=res)
+
+
+@app.route('/delete_rating_and_review')
+def delete_rating_and_review():
+    id = request.args.get('id')
+    qry = "DELETE FROM `rating_and_review` WHERE id=%s"
+    iud(qry, id)
+    return '''<script>alert("Deleted");window.location="rating_and_review#get-started"</script>'''
+
+
+@app.route('/send_rating', methods=['post'])
+def send_rating():
+    qry = "select * from `builders`"
+    res = selectall(qry)
+    return render_template('user/send_rating.html', val=res)
+
+
+@app.route('/insert_rating', methods=['post'])
+def insert_rating():
+    bid = request.form['select']
+    review = request.form['textfield']
+    rating = request.form['textfield2']
+    qry = "INSERT INTO `rating_and_review` VALUES(NULL,%s,%s,%s,%s,CURDATE())"
+    iud(qry,(bid,session['lid'],rating,review))
+    return '''<script>alert("Success");window.location="rating_and_review#get-started"</script>'''
+
+
 app.run(debug=True)

@@ -1,0 +1,33 @@
+{% extends "user/user_index.html" %}
+{% block body %}
+<head>
+    <meta charset="UTF-8">
+    <title>Verify users</title>
+</head>
+<body>
+<form action="send_complaint" method="post">
+<table border="1" class="table table-striped table-hover table-dark" >
+    <tr>
+        <th>Complaint</th>
+        <th>Date</th>
+        <th>Reply</th>
+    </tr>
+
+    {% for i in val %}
+
+    <tr>
+        <td>{{i['complaint']}}</td>
+        <td>{{i['date']}}</td>
+        <td>{{i['reply']}}</td>
+    </tr>
+
+    {% endfor %}
+
+    <tr align="center">
+        <td colspan="3"><input type="submit" value="New complaint" class="btn btn-success"></td>
+    </tr>
+
+</table>
+    </form>
+</body>
+{% endblock %}

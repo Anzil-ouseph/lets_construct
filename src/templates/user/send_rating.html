@@ -1,0 +1,43 @@
+{% extends "admin/admin_index.html" %}
+{% block body %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Send Complaint</title>
+</head>
+<body>
+
+<form method="post" action="insert_rating">
+
+<table align="center" class="table table-striped table-hover table-dark">
+<tr>
+    <th>Builder</th>
+    <th>
+        <select name="select">
+            {% for i in val %}
+            <option value="{{i['lid']}}">{{i['name']}}</option>
+            {% endfor %}
+        </select>
+    </th>
+</tr>
+    <tr>
+        <th>Review</th>
+        <td><input type="text" name="textfield" required></td>
+    </tr>
+  <tr>
+        <th>Rating</th>
+        <td><input type="text" name="textfield2" required></td>
+    </tr>
+
+    <tr align="center">
+        <th colspan="2"><input type="submit" value="Send" class="btn btn-success"></th>
+    </tr>
+
+</table>
+
+</form>
+
+</body>
+<!--</html>-->
+{% endblock %}
