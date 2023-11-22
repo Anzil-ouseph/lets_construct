@@ -1,17 +1,18 @@
 import pymysql
 
 
-def iud(qry,val):
-    con=pymysql.connect(host='localhost',port=3306,user='root',password='',db='lets_construct')
-    cmd=con.cursor()
-    cmd.execute(qry,val)
-    id=cmd.lastrowid
+def iud(qry, val):
+    con = pymysql.connect(host='localhost',port=3306,user='root',password='',db='lets_construct')
+    cmd = con.cursor()
+    cmd.execute(qry, val)
+    id = cmd.lastrowid
     con.commit()
     con.close()
 
     return id
 
-def selectone(qry,val):
+
+def selectone(qry, val):
     con=pymysql.connect(host='localhost',port=3306,user='root',password='',db='lets_construct',cursorclass=pymysql.cursors.DictCursor)
     cmd=con.cursor()
     cmd.execute(qry,val)

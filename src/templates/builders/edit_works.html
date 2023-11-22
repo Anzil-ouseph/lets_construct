@@ -11,7 +11,18 @@
         <th>Work name</th>
         <td><input type="text" name="textfield" value="{{val['name']}}" required></td>
     </tr>
+    <tr>
+        <th>Category</th>
 
+     <td>
+            <select name="select">
+                <option {% if val['category'] == "Home" %} selected {% endif %} >Home</option>
+                <option {% if val['category'] == "Apartments" %} selected {% endif %} >Apartments</option>
+                <option {% if val['category'] == "Shop" %} selected {% endif %} >Shop</option>
+                <option {% if val['category'] == "Others" %} selected {% endif %} >Others</option>
+            </select>
+        </td>
+</tr>
     <tr>
         <th>Place</th>
         <td><input type="text" name="textfield2" value="{{val['place']}}" required></td>

@@ -12,6 +12,7 @@
 <table border="1" class="table table-hover table-striped table-dark">
     <tr>
         <th>Name</th>
+        <th>Category</th>
         <th>Place</th>
         <th>Cost</th>
         <th>Image</th>
@@ -23,6 +24,7 @@
 
     <tr>
         <td>{{i['name']}}</td>
+        <td>{{i['category']}}</td>
         <td>{{i['place']}}</td>
         <td>{{i['cost']}}</td>
         <td><img src="../static/uploads/{{i['image']}}" width='100px' height='100px' ></td>
@@ -36,7 +38,7 @@
 
 
     <tr align="center">
-        <th colspan="5"><input type="submit" value="Add new" class="btn btn-success"></th>
+        <th colspan="6"><input type="submit" value="Add new" class="btn btn-success"></th>
     </tr>
 
 </table>

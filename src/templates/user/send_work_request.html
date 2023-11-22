@@ -6,10 +6,25 @@
 </head>
 <body>
 
-<form method="post" action="add_work">
+<form method="post" action="view_works" name="add">
 
 
 <table border="1" class="table table-hover table-striped table-dark">
+     <tr>
+        <th>Category</th>
+        <td>
+            <select name="select">
+                <option>Home</option>
+                <option>Apartments</option>
+                <option>Shop</option>
+                <option>Others</option>
+            </select>
+        </td>
+
+         <td colspan="5">
+             <input type="submit" value="Search">
+         </td>
+    </tr>
     <tr>
         <th>Builder Name</th>
         <th>Work name</th>

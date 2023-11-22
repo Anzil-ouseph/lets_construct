@@ -43,7 +43,6 @@ def login_code():
         session['lid'] = res['id']
 
         return '''<script>alert("Welcome builder");window.location="/builder_home"</script>'''
-
     else:
         return '''<script>alert("Invalid username or password");window.location="/"</script>'''
 
@@ -114,6 +113,7 @@ def admin_home():
 def verify_users():
     qry = "SELECT * FROM `user` JOIN `login` ON `user`.lid=`login`.id WHERE `type`='pending'"
     res = selectall(qry)
+
 
     return render_template("admin/verify_users.html", val=res)
 
@@ -241,6 +241,7 @@ def add_work():
 
 @app.route('/insert_works', methods=['post'])
 def insert_works():
+    category = request.form['select']
     name = request.form['textfield']
     place = request.form['textfield2']
     cost = request.form['textfield3']
@@ -250,8 +251,8 @@ def insert_works():
     img_name = secure_filename(image.filename)
     image.save(os.path.join('static/uploads', img_name))
 
-    qry = "INSERT INTO `works` VALUES(NULL,%s,%s,%s,%s,%s)"
-    iud(qry, (session['lid'], name, place, cost, img_name))
+    qry = "INSERT INTO `works` VALUES(NULL,%s,%s,%s,%s,%s,%s)"
+    iud(qry, (session['lid'], category, name, place, cost, img_name))
 
     return '''<script>alert("Successfully added");window.location="/manage_works#about"</script>'''
 
@@ -280,6 +281,7 @@ def edit_work():
 def update_work():
     try:
         name = request.form['textfield']
+        category = request.form['select']
         place = request.form['textfield2']
         cost = request.form['textfield3']
 
@@ -288,17 +290,18 @@ def update_work():
         img_name = secure_filename(image.filename)
         image.save(os.path.join('static/uploads', img_name))
 
-        qry = "UPDATE `works` SET `name`=%s,`place`=%s,`cost`=%s,`image`=%s WHERE `id`=%s"
-        iud(qry, (name, place, cost, img_name, session['wid']))
+        qry = "UPDATE `works` SET `category` = %s,`name`=%s,`place`=%s,`cost`=%s,`image`=%s WHERE `id`=%s"
+        iud(qry, (category,name, place, cost, img_name, session['wid']))
 
         return '''<script>alert("Successfully Edited");window.location="/manage_works#about"</script>'''
     except Exception as e:
         name = request.form['textfield']
+        category = request.form['select']
         place = request.form['textfield2']
         cost = request.form['textfield3']
 
-        qry = "UPDATE `works` SET `name`=%s,`place`=%s,`cost`=%s WHERE `id`=%s"
-        iud(qry, (name, place, cost, session['wid']))
+        qry = "UPDATE `works` SET `category` = %s, `name`=%s,`place`=%s,`cost`=%s WHERE `id`=%s"
+        iud(qry, (category,name, place, cost, session['wid']))
 
         return '''<script>alert("Successfully Edited");window.location="/manage_works#about"</script>'''
 
@@ -362,10 +365,17 @@ def user_home():
     return render_template("user/user_index.html")
 
 
-@app.route('/view_works')
+@app.route('/view_works1')
+def view_works1():
+
+    return render_template("user/send_work_request.html")
+
+
+@app.route('/view_works', methods=['post'])
 def view_works():
-    qry = "SELECT `builders`.name AS bname,latitude,longitude,`works`.* FROM `works` JOIN `builders` ON `works`.`bid`=`builders`.`lid`"
-    res = selectall(qry)
+    category = request.form['select']
+    qry = "SELECT `builders`.name AS bname,latitude,longitude,`works`.* FROM `works` JOIN `builders` ON `works`.`bid`=`builders`.`lid` where works.category=%s"
+    res = selectall2(qry,category)
     return render_template("user/send_work_request.html", val=res)
 
 
@@ -381,7 +391,7 @@ def insert_request():
     req = request.form['textfield']
     qry = "INSERT INTO `request` VALUES(NULL,%s,%s,CURDATE(),%s,'pending')"
     iud(qry, (session['lid'], session['work_id'], req))
-    return '''<script>alert("Request send successfully");window.location="/view_works"</script>'''
+    return '''<script>alert("Request send successfully");window.location="/view_works1"</script>'''
 
 
 @app.route('/view_work_status')
